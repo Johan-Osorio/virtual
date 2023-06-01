@@ -1,0 +1,70 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestión de Matriculas</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarMatricula" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtmatricula" class="form-label">IdMatricula:</label>
+                        <input type="text" name="txtmatricula" class="form-control" id="txtmatricula">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="txtcurso" name="txtcurso">
+                            <option value="" disabled selected>Seleccione un curso</option>
+                            {% for curso in cursos %}
+                                <option value="{{ curso.codigo }}">{{ curso.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtfechamat" class="form-label">Fechamat:</label>
+                        <input type="date" name="txtfechamat" class="form-control" id="txtfechamat">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtcuotas" class="form-label">Cuotas:</label>
+                        <input type="text" name="txtcuotas" class="form-control" id="txtcuotas">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h2>Lista de Datos</h2>
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th>IdMatricula</th>
+                    <th>IdCurso</th>
+                    <th>Fechamat</th>
+                    <th>Cuotas</th>
+                    <th colspan="2">Opciones de Manejo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in matricula %}
+                <tr>
+                    <td>{{ m.idMatricula }}</td>
+                    <td>{{ m.cursos }}</td>
+                    <td>{{ m.fechaMat }}</td>
+                    <td>{{ m.cuotas }}</td>
+                    <td><a href="edicionMatricula/{{ m.idMatricula }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="eliminarMatricula/{{ m.idMatricula }}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

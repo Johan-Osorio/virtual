@@ -1,0 +1,42 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Edicion de MAtriculas</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarMatricula" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtmatricula" class="form-label">IdMatricula:</label>
+                        <input type="text" name="txtmatricula" class="form-control" id="txtmatricula" value="{{matricula.idMatricula}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="txtcurso" name="txtcurso">
+                            <option value="" disabled selected>Seleccione un curso</option>
+                            {% for curso in cursos %}
+                                <option value="{{ curso.codigo }}">{{ curso.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtfechamat" class="form-label">Fechamat:</label>
+                        <input type="date" name="txtfechamat" class="form-control" id="txtfechamat" value="{{matricula.fechaMat}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtcuotas" class="form-label">Cuotas:</label>
+                        <input type="text" name="txtcuotas" class="form-control" id="txtcuotas" value="{{matricula.cuotas}}">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

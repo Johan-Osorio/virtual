@@ -1,0 +1,78 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestión de Docentes</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarDocentes" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtcodigo" class="form-label">Código:</label>
+                        <input type="text" name="txtcodigo" class="form-control" id="txtcodigo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtnombre" class="form-label">Nombre:</label>
+                        <input type="text" name="txtnombre" class="form-control" id="txtnombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtapellido" class="form-label">Apellido:</label>
+                        <input type="text" name="txtapellido" class="form-control" id="txtapellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtfecha_ingreso" class="form-label">Fecha de Ingreso:</label>
+                        <input type="date" name="txtfecha_ingreso" class="form-control" id="txtfecha_ingreso">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numdni" class="form-label">DNI:</label>
+                        <input type="number" name="numdni" class="form-control" id="numdni">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numtelefono" class="form-label">Telefono:</label>
+                        <input type="number" name="numtelefono" class="form-control" id="numtelefono">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h2>Lista de Datos</h2>
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>DNI</th>
+                    <th>Telefono</th>
+                    <th colspan="2">Opciones de Manejo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in docentes %}
+                <tr>
+                    <td>{{ d.idDocente }}</td>
+                    <td>{{ d.nombre }}</td>
+                    <td>{{ d.apellido }}</td>
+                    <td>{{ d.fecha_ingreso }}</td>
+                    <td>{{ d.dni }}</td>
+                    <td>{{ d.telefono }}</td>
+                    <td><a href="edicionDocente/{{ d.idDocente }}" class="btn btn-info">Editar</a></td>
+                    <td><a href="eliminarDocente/{{ d.idDocente }}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<form class="d-flex" role="search" method="POST" name="nombre">
+    {% csrf_token %}
+    <div class="search-container">
+        <input class="form-control form-control-sm me-2" type="search" placeholder="Nombre curso" aria-label="Search" name="nombre">
+        <button class="btn btn-outline-primary btn-warning" type="submit">Buscar</button>
+    </div>
+</form>
+
+<div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h2>Lista de Datos</h2>
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Nro de Créditos</th>
+                <th colspan="2">Opciones de Manejo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in curso %}
+            <tr>
+                <td>{{ result.codigo }}</td>
+                <td>{{ result.nombre }}</td>
+                <td>{{ result.creditos }}</td>
+                <td><a href="edicionCurso/{{ result.codigo }}" class="btn btn-info">Editar</a></td>
+                <td><a href="eliminarCursos/{{ result.codigo }}" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock %}

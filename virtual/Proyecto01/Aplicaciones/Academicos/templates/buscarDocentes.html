@@ -1,0 +1,47 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<form class="d-flex" role="search" method="POST" name="fecha_ingreso">
+    {% csrf_token %}
+    <div class="search-container">
+        <input class="form-control form-control-sm me-2" type="date" placeholder="Buscar" aria-label="Search" name="fecha_ingreso">
+        <button class="btn btn-outline-primary btn-warning" type="submit">Buscar</button>
+    </div>
+</form>
+
+<div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h2>Lista de Datos</h2>
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha de Ingreso</th>
+                <th>DNI</th>
+                <th>Telefono</th>
+                <th colspan="2">Opciones de Manejo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in docente %}
+            <tr>
+                <td>{{ p.idDocente }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.apellido }}</td>
+                <td>{{ p.fecha_ingreso }}</td>
+                <td>{{ p.dni }}</td>
+                <td>{{ p.telefono }}</td>
+                <td><a href="edicionDocente/{{ p.idDocente }}" class="btn btn-info">Editar</a></td>
+                <td><a href="eliminarDocente/{{ p.idDocente }}" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock %}

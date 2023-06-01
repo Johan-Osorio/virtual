@@ -1,0 +1,43 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<form class="d-flex" role="search" method="POST" name="fechaMat">
+    {% csrf_token %}
+    <div class="search-container">
+        <input class="form-control form-control-sm me-2" type="date" placeholder="Buscar" aria-label="Search" name="fechaMat">
+        <button class="btn btn-outline-primary btn-warning" type="submit">Buscar</button>
+    </div>
+</form>
+
+<div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <h2>Lista de Datos</h2>
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>IdMatricula</th>
+                <th>IdCurso</th>
+                <th>Fechamat</th>
+                <th>Cuotas</th>
+                <th colspan="2">Opciones de Manejo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in matricula %}
+            <tr>
+                <td>{{ m.idMatricula }}</td>
+                <td>{{ m.cursos }}</td>
+                <td>{{ m.fechaMat }}</td>
+                <td>{{ m.cuotas }}</td>
+                <td><a href="edicionMatricula/{{ m.idMatricula }}" class="btn btn-info">Editar</a></td>
+                <td><a href="eliminarMatricula/{{ m.idMatricula }}" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock %}

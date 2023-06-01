@@ -1,0 +1,46 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Edicion de Docentes</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarDocente" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtcodigo" class="form-label">Código:</label>
+                        <input type="text" name="txtcodigo" class="form-control" id="txtcodigo" value="{{docente.idDocente}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtnombre" class="form-label">Nombre:</label>
+                        <input type="text" name="txtnombre" class="form-control" id="txtnombre" value="{{docente.nombre}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtapellido" class="form-label">Apellido:</label>
+                        <input type="text" name="txtapellido" class="form-control" id="txtapellido" value="{{docente.apellido}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtfecha_ingreso" class="form-label">Fecha de Ingreso:</label>
+                        <input type="date" name="txtfecha_ingreso" class="form-control" id="txtfecha_ingreso" value="{{docente.fecha_ingreso}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numdni" class="form-label">DNI:</label>
+                        <input type="number" name="numdni" class="form-control" id="numdni" value="{{docente.dni}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numtelefono" class="form-label">Telefono:</label>
+                        <input type="number" name="numtelefono" class="form-control" id="numtelefono" value="{{docente.telefono}}">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends './Base.html' %}
+
+{% block title %}Gestión de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Edicion de Especialidad</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarespecialidad" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtcodigo" class="form-label">Código:</label>
+                        <input type="text" name="txtcodigo" class="form-control" id="txtcodigo" value="{{especialidad.idEspecialidad}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtnombre" class="form-label">Nombre:</label>
+                        <input type="text" name="txtnombre" class="form-control" id="txtnombre" value="{{especialidad.nombre}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtdescripcion" class="form-label">Descripcion:</label>
+                        <input type="text" name="txtdescripcion" class="form-control" id="txtdescripcion" value="{{especialidad.descripcion}}">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
